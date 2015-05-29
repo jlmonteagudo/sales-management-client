@@ -1,0 +1,40 @@
+<section class="mainbar">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Customer List
+    </div>
+    <div class="panel-body">
+
+      <div class="pull-right">
+        <a type="button" class="btn btn-success" href="/customer/create">
+          <i class="glyphicon glyphicon-open"></i> New Customer
+        </a>
+      </div>
+
+      <table ng-table="vm.tableParams" show-filter="true" class="table table-condensed table-striped">
+          <tr ng-repeat="customer in $data">
+              <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">{{customer.name}}</td>
+              <td data-title="'Address'" sortable="'address'" filter="{'address': 'text'}">{{customer.address}}</td>
+              <td data-title="'State'" sortable="'state'" filter="{'state': 'text'}">{{customer.state}}</td>
+              <td data-title="'Country'" sortable="'country'" filter="{'country': 'text'}">{{customer.country}}</td>
+              <td>
+                 <div class="table-actions">
+                      <a class="btn btn-default" title="View" href="/customer/{{customer.id}}">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                      </a>
+                      <a class="btn btn-default" title="Edit" href="/customer/{{customer.id}}/edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(customer)" item="customer">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                      </a>
+                  </div>
+              </td>
+          </tr>
+      </table>
+
+    </div>
+  </div>
+
+</section>

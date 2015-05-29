@@ -1,0 +1,57 @@
+
+<div class="modal-header">
+	<h3 class="modal-title">Add New Line</h3>
+</div>
+
+<div class="modal-body">
+
+      <form data-ng-submit="create()" novalidate>
+		  
+        <div class="formly-field formly-field-input" >
+          <div class="form-group">
+            <div>
+              <label class="control-label">
+                Product:*
+              </label>
+                
+              <ui-select ng-model="saleLine.product"
+                theme="bootstrap"
+                style="width: 300px;"
+                class="select-product"
+                title="Choose a product"
+                ng-change="setPrice()">
+                
+                <ui-select-match placeholder="Enter a product...">{{$select.selected.description}}</ui-select-match>
+                
+                <ui-select-choices repeat="product in products track by $index"
+                  refresh="refreshProducts($select.search)"
+                  refresh-delay="0">
+                  <div ng-bind-html="product.description | highlight: $select.search"></div>
+                </ui-select-choices>
+    
+              </ui-select>                
+
+            </div>
+          </div>
+        </div>        
+
+        <formly-form model="saleLine" fields="formFields" form="form">
+        </formly-form>
+		
+        <hr/>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success" ng-disabled="form.$invalid || !saleLine.product">
+              <i class="glyphicon glyphicon-ok"></i> Save
+            </button>
+            <a class="btn btn-danger" ng-click="cancel()">
+              <i class="glyphicon glyphicon-remove"></i> Cancel
+            </a>
+        </div>
+
+        <div data-ng-show="error" class="alert alert-danger form-group">
+          <strong data-ng-bind="error"></strong>
+        </div>
+
+      </form>
+
+</div>

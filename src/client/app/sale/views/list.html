@@ -1,0 +1,36 @@
+<section class="mainbar">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Sale List
+    </div>
+    <div class="panel-body">
+
+      <div class="pull-right">
+        <a type="button" class="btn btn-success" href="/sale/create">
+          <i class="glyphicon glyphicon-open"></i> New Sale
+        </a>
+      </div>
+
+      <table ng-table="vm.tableParams" show-filter="true" class="table table-condensed table-striped">
+          <tr ng-repeat="sale in $data">
+              <td data-title="'ID'" sortable="'id'" filter="{ 'id': 'text' }">{{sale.id}}</td>
+              <td data-title="'Creation Date'" sortable="'createdAt'">{{sale.createdAt | date:'medium'}}</td>
+              <td data-title="'Customer'" sortable="'customer'">{{sale.customer.name}}</td>
+              <td>
+                 <div class="table-actions">
+                      <a class="btn btn-default" title="View" href="/sale/{{sale.id}}">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                      </a>
+                      <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(sale)" item="sale">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                      </a>
+                  </div>
+              </td>
+          </tr>
+      </table>
+
+    </div>
+  </div>
+
+</section>

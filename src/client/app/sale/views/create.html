@@ -1,0 +1,76 @@
+<section class="mainbar" data-ng-init="vm.setFormFields()">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      New Sale
+    </div>
+    <div class="panel-body">
+
+      <form data-ng-submit="vm.create()" novalidate>
+
+        <div class="formly-field formly-field-input" >
+          <div class="form-group">
+            <div>
+              <label class="control-label">
+                Customer:*
+              </label>
+                
+              <ui-select ng-model="vm.sale.customer"
+                theme="bootstrap"
+                class="select-customer"
+                title="Choose a customer">
+                
+                <ui-select-match placeholder="Enter a customer...">{{$select.selected.name}}</ui-select-match>
+                
+                <ui-select-choices repeat="customer in vm.customers track by $index"
+                  refresh="vm.refreshCustomers($select.search)"
+                  refresh-delay="0">
+                  <div ng-bind-html="customer.name | highlight: $select.search"></div>
+                </ui-select-choices>
+    
+              </ui-select>                
+
+            </div>
+          </div>
+        </div>        
+
+        <div class="wrapper-table-sale-lines" ng-if="vm.sale.lines.length">
+          <table class="table table-striped table-condensed table-sale-lines">
+            <tr>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Price</th>
+            </tr>
+
+            <tr ng-repeat="saleLine in vm.sale.lines">
+              <td>{{ saleLine.product.description }}</td>
+              <td>{{ saleLine.quantity }}</td>
+              <td>{{ saleLine.price }}</td>
+            </tr>
+
+          </table>
+        </div>
+
+        <hr/>
+        <div class="form-group">
+            <a class="btn btn-info" add-sale-line sale="vm.sale">
+              <i class="glyphicon glyphicon-plus"></i> Add Line
+            </a>
+            <button type="submit" class="btn btn-success" ng-disabled="vm.form.$invalid || !vm.sale.lines.length || !vm.sale.customer">
+              <i class="glyphicon glyphicon-ok"></i> Save
+            </button>
+            <a class="btn btn-danger" href="/sale">
+              <i class="glyphicon glyphicon-remove"></i> Cancel
+            </a>
+        </div>
+
+        <div data-ng-show="vm.error" class="alert alert-danger form-group">
+          <strong data-ng-bind="vm.error"></strong>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</section>

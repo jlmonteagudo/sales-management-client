@@ -1,0 +1,30 @@
+<section class="mainbar" data-ng-init="vm.toViewCustomer()">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+			Customer View
+    </div>
+    <div class="panel-body">
+
+      <form novalidate>
+        <formly-form model="vm.customer" fields="vm.formFields">
+        </formly-form>
+      </form>
+
+      <hr/>
+      <div>
+        <a class="btn btn-success" href="/customer/{{vm.customer.id}}/edit">
+          <i class="glyphicon glyphicon-edit"></i> Edit
+        </a>
+        <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove()" item="vm.customer">
+          <i class="glyphicon glyphicon-remove-circle"></i> Delete
+        </a>
+        <a class="btn btn-primary" href="/customer">
+          <i class="glyphicon glyphicon-list"></i> List Customers
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</section>
