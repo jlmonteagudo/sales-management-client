@@ -38,7 +38,11 @@
         };
     }
 
-    var ModalInstanceController = function($scope, $modalInstance, SaleLineForm, Product) {
+    var ModalInstanceController = ['$scope',
+    '$modalInstance',
+    'SaleLineForm',
+    'Product',
+    function($scope, $modalInstance, SaleLineForm, Product) {
 
         $scope.saleLine = {};
         $scope.formFields = SaleLineForm.getFormFields(false);
@@ -75,6 +79,6 @@
             }
         };
 
-    };
+    }];
 
 })();
