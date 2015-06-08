@@ -11,18 +11,9 @@
     /* @ngInject */
     function factory(ngTableParams) {
 
-        var previousEntity;
-
         var getData = function(Entity) {
             return function($defer, params) {
-
                 var requestParams = convertToServerRequestParams(params.$params);
-
-                if (previousEntity !== Entity) {
-                    previousEntity = Entity;
-                    tableParams.$params.filter = {};
-                }
-
                 Entity.get(requestParams, function(response) {
                     params.total(response.total);
                     $defer.resolve(response.results);
@@ -44,6 +35,8 @@
         var tableParams = new ngTableParams(params, settings);
 
         var getParams = function(Entity) {
+            tableParams.$params.filter = {};
+            tableParams.$params.page = params.page;
             tableParams.settings({getData: getData(Entity)});
             return tableParams;
         };
